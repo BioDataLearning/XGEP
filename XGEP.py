@@ -1,7 +1,4 @@
 #!/usr/bin/python
-#Author: Shuzhen Kuang
-#Mail: skuang@g.clemson.edu
-#Modified Time: 11-20-2019
 
 from utils import *
 import os,sys

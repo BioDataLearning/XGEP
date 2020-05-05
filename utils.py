@@ -90,7 +90,7 @@ def get_DNN_pred_data(pos_file,neg_file,pred_file):
     X_pred_minmax = min_max_scaler.transform(X_pred)
     return X_train_minmax,Y_train,X_val_minmax,Y_val,X_pred_minmax,Info_pred
  
-''' PFA, prob false alert for binary classifier'''
+'''Calculate ROC AUC during model training, obtained from <https://github.com/nathanshartmann/NILC-at-CWI-2018>'''
 def binary_PFA(y_true, y_pred, threshold=K.variable(value=0.5)):
     y_pred = K.cast(y_pred >= threshold, 'float32')
     # N = total number of negative labels
@@ -145,6 +145,7 @@ def metrics(Y_test, rounded, pred_train_prob, fileout):
     prauc = PRAUC(Y_test,pred_train_prob)
     return accuracy_score(Y_test, rounded),sepcificity,sensitivity,mcc,f1,aucvalue,prauc
 
+'''get the DNN model'''
 def get_DNN_model(params):
     model = Sequential()
     model.add(Dense(int(params['hdim']), input_dim=150,activation="relu",kernel_regularizer=regularizers.l2(params['l2_reg'])))
