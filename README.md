@@ -1,7 +1,7 @@
-# XGEP for Expression-based Prediction of Human Essential Genes and Associated LncRNAs in Cancer Cells
-XGEP is developed to predict essential genes and associated lncRNAs in cancer cells using relevant features derived from the TCGA transcriptome dataset through collaborative embedding. XGEP has been evaluated on pan-cancer data and cancer-type-specific data and used for predicting core essential genes and essential genes in specific cancer types. It is implemented in Python.
+# XGEP for Expression-based Prediction of Human Essential Genes and Candidate LncRNAs in Cancer Cells
+XGEP hsa been developed to predict essential genes and candidate lncRNAs in cancer cells using relevant features derived from the TCGA transcriptome dataset through collaborative embedding. XGEP has been evaluated on pan-cancer data and cancer-type-specific data and used for predicting core essential genes and essential genes in specific cancer types. It was implemented in Python.
 
-This documentation is part of the supplementary information release for XGEP. For details of this work, please refer to our paper "Expression-based Prediction of Human Essential Genes and Associated LncRNAs in Cancer Cells" (S. Kuang, Y. Wei and L. Wang, 2020).
+This documentation is part of the supplementary information release for XGEP. For details of this work, please refer to our paper "Expression-based Prediction of Human Essential Genes and Candidate LncRNAs in Cancer Cells" (S. Kuang, Y. Wei and L. Wang, 2020).
 
 ## Requirements
 - python3
@@ -19,14 +19,14 @@ This documentation is part of the supplementary information release for XGEP. Fo
 ## Embedding Vectors
 The gene embedding vectors for essential and non-essential genes have been deposited into the Data directory. These embedding vectors were generated from the transcriptome data of either pan-cancer or specific cancer types (COAD, CESC and GBM) using unsupervised collaborative embedding. The transcriptome data were downloaded from TCGA database (https://portal.gdc.cancer.gov/). The code for collaborative embedding were modified from https://github.com/zeochoy/tcga-embedding/blob/master/train.py. If you would like to generate your own embedding vectors using the code, you will need to install fastai library.
 
-## Hyperparameter Optimization of DNN models
-Gradient boosted tree (implemented using XGBoost, called as XGB in this study), support vector machine (SVM) and deep neural network (DNN) models were included in XGEP to predict gene essentiality in cancer cells. Considering the relatively large hyperparameter space of DNN models, Bayesian optimization, which has been shown to be more time-efficient for hyperparameter tuning than grid or random search, was used to hyperparameter tuning of the DNN models. We have included the optimized hyperparameters used in our study in "XGEP.py". If you would like to run the hyperparameter tuning by yourself, please use the following command line:
+## Hyperparameter Optimization of DNN model
+Gradient boosted tree (implemented using XGBoost, called as XGB in this study), support vector machine (SVM) and deep neural network (DNN) models were included in XGEP to predict gene essentiality in cancer cells. Considering the relatively large hyperparameter space of DNN model, Bayesian optimization was used for hyperparameter tuning of the DNN model. Bayesian optimization has been shown to be more time-efficient for hyperparameter tuning than grid or random search. We have included the optimized hyperparameters used in our study in "XGEP.py". If you would like to run the hyperparameter tuning by yourself, please use the following command line:
 
 ```
-$ python DNN_hyperparameters_search_test.py -e Essential_genes_pancancer_emb_len150 -n Non_essential_genes_pancancer_emb_len150 -o DNN_hyperparamter_output
+$ python DNN_hyperparameters_search.py -e Essential_genes_pancancer_emb_len150 -n Non_essential_genes_pancancer_emb_len150 -o DNN_hyperparameter_output
 ```
 
-Please substitute the 'Essential_genes_pancancer_emb_len150_test' and 'Non_essential_genes_pancancer_emb_len150' with your own embedding vectors for essential (positive) and non-essential (negative) genes.
+Please substitute the 'Essential_genes_pancancer_emb_len150' and 'Non_essential_genes_pancancer_emb_len150' with your own embedding vectors for essential (positive) and non-essential (negative) genes.
 
 ## XGEP Evaluation and Essential Gene Prediction
 To evaluate the performance of XGEP and make prediction on the genes not included in the training dataset, the following command line could be used:
